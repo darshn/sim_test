@@ -150,23 +150,52 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_8" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <widget class="QWidget" name="widget_10" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_29">
           <item>
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Output Directory</string>
-            </property>
+           <widget class="QWidget" name="widget_16" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_30">
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>ROS Configuration</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="ros_txt_field"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="ros_config_btn">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="output_dir_txt_field"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="output_btn">
-            <property name="text">
-             <string>Browse</string>
-            </property>
+           <widget class="QWidget" name="widget_8" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Output Directory</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="output_dir_txt_field"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="output_btn">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
