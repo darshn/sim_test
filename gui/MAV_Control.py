@@ -22,6 +22,9 @@ except ImportError as ie:
     sys.exit()
 
 
+    
+    
+
 class MAV_Control(QtGui.QMainWindow):
     '''
     GUI Controller Class for control over MAV
@@ -30,7 +33,9 @@ class MAV_Control(QtGui.QMainWindow):
         
         QtGui.QMainWindow.__init__(self)
         loadUi("GUI.ui", self)
-        ros_topics = rospy.get_published_topics()
+        
+        
+        
         self.output_directory = ''
         self.op_mode = ''
         self.config = ''
@@ -43,9 +48,9 @@ class MAV_Control(QtGui.QMainWindow):
         self.activation_threshold = self.auto_threshold.value()
         
 
-        self.ls_topic_cb.addItems(ros_topics[0])
-        self.st_r_cb.addItems(ros_topics[0])
-        self.st_l_cb.addItems(ros_topics[0])
+#        self.ls_topic_cb.addItems(self.ros_topics[0])
+#        self.st_r_cb.addItems(self.ros_topics[0])
+#        self.st_l_cb.addItems(self.ros_topics[0])
         self.set_label('','Black')
         self.quit_btn.clicked.connect(QtCore.QCoreApplication.instance().quit)
         self.save_config_btn.clicked.connect(self.save_config_btn_clicked)
@@ -53,16 +58,26 @@ class MAV_Control(QtGui.QMainWindow):
         self.reset_btn.clicked.connect(self.reset_btn_clicked)
         self.radio_controller.toggled.connect(self.radio_toggled)
         self.radio_controller_OA.toggled.connect(self.radio_toggled)
-        self.height_up_btn.setArrowType(Qt.DownArrow)
         self.twist_spinbox.valueChanged.connect(self.spinbox_value_changed)
         self.warn_spinbox.valueChanged.connect(self.spinbox_value_changed)
         self.auto_spinbox.valueChanged.connect(self.spinbox_value_changed)
         
+        self.sim_widget.setEnabled(True)
         self.radio_controller.setChecked(True)
         
         
 #__________________________________________________________________________________________________
         
+    def operation_mode(self):
+        if self.mav_radio.isChecked():
+            self.gazebo_config_widget.setEnabled(False)
+            self.mav_widget.setEnabled(True)
+            self.sim_widget.setEnabled(False)
+        if self.sim_radio.isChecked():
+            self.mav_widget.setEnabled(True)
+            self.gazebo_widget.setEnabled(True)
+            self.sim_widget.setEnabled(False)
+
     def radio_toggled(self):
         if self.radio_controller.isChecked():
             self.op_mode = 'rc'
@@ -171,22 +186,22 @@ class MAV_Control(QtGui.QMainWindow):
             self.output_dir_txt_field.setText(json_obj.get('output_directory'))
             self.output_directory = json_obj.get('output_directory')
             
-            ros_topics = rospy.get_published_topics()
+   ## check ros_topics var         
             
-            if json_obj.get('laser_scan_topic') in ros_topics:
-                index = ls_topic_cb.findText(json_obj.get('laser_scan_topic'), QtCore.Qt.MatchFixedString)
-                if index >= 0:
-                    self.ls_topic_cb.setCurrentIndex(index)
-            
-            if json_obj.get('stereo_cam_right_topic') in ros_topics:
-                index = st_r_cb.findText(json_obj.get('stereo_cam_right_topic'), QtCore.Qt.MatchFixedString)
-                if index >= 0:
-                    self.st_r_cb.setCurrentIndex(index)
-                    
-            if json_obj.get('stereo_cam_left_topic') in ros_topics:
-                index = st_l_cb.findText(json_obj.get('stereo_cam_left_topic'), QtCore.Qt.MatchFixedString)
-                if index >= 0:
-                    self.st_l_cb.setCurrentIndex(index)
+#            if json_obj.get('laser_scan_topic') in self.ros_topics[0]:
+#                index = self.ls_topic_cb.findText(json_obj.get('laser_scan_topic'), QtCore.Qt.MatchFixedString)
+#                if index >= 0:
+#                    self.ls_topic_cb.setCurrentIndex(index)
+#            
+#            if json_obj.get('stereo_cam_right_topic') in self.ros_topics[0]:
+#                index = self.st_r_cb.findText(json_obj.get('stereo_cam_right_topic'), QtCore.Qt.MatchFixedString)
+#                if index >= 0:
+#                    self.st_r_cb.setCurrentIndex(index)
+#                    
+#            if json_obj.get('stereo_cam_left_topic') in self.ros_topics[0]:
+#                index = self.st_l_cb.findText(json_obj.get('stereo_cam_left_topic'), QtCore.Qt.MatchFixedString)
+#                if index >= 0:
+#                    self.st_l_cb.setCurrentIndex(index)
             
         except IOError as ioe:
             print('File not found', ioe)
@@ -250,6 +265,7 @@ class MAV_Control(QtGui.QMainWindow):
     
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
+    
     MainWindow = MAV_Control()
-    MainWindow.show()
+    MainWindow.showMaximised()
     sys.exit(app.exec_())
