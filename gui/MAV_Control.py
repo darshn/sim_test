@@ -21,10 +21,7 @@ except ImportError as ie:
     print('Import Libraries missing:', ie)
     sys.exit()
 
-
     
-    
-
 class MAV_Control(QtGui.QMainWindow):
     '''
     GUI Controller Class for control over MAV
@@ -33,6 +30,8 @@ class MAV_Control(QtGui.QMainWindow):
         
         QtGui.QMainWindow.__init__(self)
         loadUi("GUI.ui", self)
+        self.rospy_init()
+        rospy.loginfo(rospy.get_name() + ' -- Initialization Complete')
         
         
         
@@ -43,9 +42,10 @@ class MAV_Control(QtGui.QMainWindow):
         self.ros_config = ''
         self.ros_label.setStyleSheet('color : Red')
         self.ros_label.setText('OFFLINE')
-        self.twist_speed = self.twist_spinbox.value()
-        self.warning_threshold = self.warn_spinbox.value()
-        self.activation_threshold = self.auto_threshold.value()
+#        self.twist_speed = self.twist_spinbox.value()
+#        self.warning_threshold = self.warn_spinbox.value()
+#        self.activation_threshold = self.auto_spinbox.value()
+#        self.rate =
         
 
 #        self.ls_topic_cb.addItems(self.ros_topics[0])
@@ -58,13 +58,18 @@ class MAV_Control(QtGui.QMainWindow):
         self.reset_btn.clicked.connect(self.reset_btn_clicked)
         self.radio_controller.toggled.connect(self.radio_toggled)
         self.radio_controller_OA.toggled.connect(self.radio_toggled)
-        self.twist_spinbox.valueChanged.connect(self.spinbox_value_changed)
-        self.warn_spinbox.valueChanged.connect(self.spinbox_value_changed)
-        self.auto_spinbox.valueChanged.connect(self.spinbox_value_changed)
+#        self.twist_spinbox.valueChanged.connect(self.spinbox_value_changed)
+#        self.warn_spinbox.valueChanged.connect(self.spinbox_value_changed)
+#        self.auto_spinbox.valueChanged.connect(self.spinbox_value_changed)
+#        self.rate_spinbox.valueChanged.connect(self.spinbox_value_changed)        
         
-        self.sim_widget.setEnabled(True)
+        self.controller_widget.setEnabled(True)
         self.radio_controller.setChecked(True)
-        
+
+#__________________________________________________________________________________________________
+
+    def rospy_init(self):
+                
         
 #__________________________________________________________________________________________________
         
@@ -96,15 +101,17 @@ class MAV_Control(QtGui.QMainWindow):
         self.ros_config = self.ros_text_field.text()
         
     def output_directory_btn_clicked(self):
-            self.output_dir_txt_field.setText(self.dir_dialog(self.output_directory))
-            self.output_directory = self.output_dir_txt_field.text()        
-            
+        self.output_dir_txt_field.setText(self.dir_dialog(self.output_directory))
+        self.output_directory = self.output_dir_txt_field.text()        
+        
 #__________________________________________________________________________________________________
 
-    def spinbox_value_changed(self):
-        self.twist_speed = self.twist_spinbox.value()
-        self.warning_threshold = self.warn_spinbox.value()
-        self.activation_threshold = self.auto_spinbox.value()
+#    def spinbox_value_changed(self):
+#        self.twist_speed = self.twist_spinbox.value()
+#        self.warning_threshold = self.warn_spinbox.value()
+#        self.activation_threshold = self.auto_spinbox.value()
+#        self.rate = self.rate_spinbox.value()
+
         
 #__________________________________________________________________________________________________
 
@@ -256,9 +263,9 @@ class MAV_Control(QtGui.QMainWindow):
 
     @staticmethod
     def check_status(status_flag, quadrant):
-        
-        if status_flag == 1:
-            self.set_label('Warning: Object detected closer than Warning Threshold %d'%self.warning_threshold)
+        pass
+#        if status_flag == 1:
+#            self.set_label('Warning: Object detected closer than Warning Threshold %d'%self.warning_threshold)
 
  
 #__________________________________________________________________________________________________    
@@ -267,5 +274,5 @@ if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     
     MainWindow = MAV_Control()
-    MainWindow.showMaximised()
+    MainWindow.show()
     sys.exit(app.exec_())

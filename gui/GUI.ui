@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1266</width>
-    <height>988</height>
+    <height>1006</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,9 +26,9 @@
   <property name="sizeGripEnabled">
    <bool>false</bool>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_31">
+  <layout class="QVBoxLayout" name="verticalLayout_6">
    <item>
-    <widget class="QTabWidget" name="control_widget">
+    <widget class="QTabWidget" name="tab_widget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>1</horstretch>
@@ -190,7 +190,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="sim_tab">
+     <widget class="QWidget" name="controller_widget">
       <property name="toolTip">
        <string extracomment="Tab for Simulation"/>
       </property>
@@ -199,58 +199,58 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QWidget" name="widget_16" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_30">
+        <widget class="QWidget" name="widget_17" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-right-color: rgb(161, 161, 161);</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_36">
           <item>
-           <widget class="QWidget" name="widget_17" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>1</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QRadioButton" name="sim_radio">
+            <property name="text">
+             <string>Simulation</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_36">
-             <item>
-              <widget class="QRadioButton" name="sim_radio">
-               <property name="text">
-                <string>Simulation</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="mav_radio">
-               <property name="text">
-                <string>MAV</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
           <item>
-           <widget class="QWidget" name="radio_btn_widget" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>1</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QRadioButton" name="mav_radio">
+            <property name="text">
+             <string>MAV</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <widget class="QRadioButton" name="radio_controller">
-               <property name="text">
-                <string>Controller</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="radio_controller_OA">
-               <property name="text">
-                <string>Controller with Obstacle Avoidance</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="radio_btn_widget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-left-color: rgb(135, 135, 135);</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QRadioButton" name="radio_controller">
+            <property name="text">
+             <string>Controller</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radio_controller_OA">
+            <property name="text">
+             <string>Controller with Obstacle Avoidance</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -290,6 +290,12 @@
          <layout class="QHBoxLayout" name="horizontalLayout_21">
           <item>
            <widget class="QWidget" name="auto_widget" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <layout class="QHBoxLayout" name="horizontalLayout_25">
              <item>
               <widget class="QLabel" name="label_27">
@@ -316,6 +322,12 @@
           </item>
           <item>
            <widget class="QWidget" name="warn_widget" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <layout class="QHBoxLayout" name="horizontalLayout_26">
              <item>
               <widget class="QLabel" name="label_26">
@@ -342,9 +354,21 @@
           </item>
           <item>
            <widget class="QWidget" name="widget_26" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <layout class="QHBoxLayout" name="horizontalLayout_27">
              <item>
               <widget class="QLabel" name="label_7">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>Twist Velocity</string>
                </property>
@@ -363,6 +387,38 @@
                </property>
                <property name="value">
                 <number>1</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_16" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_30">
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Rate</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="rate_spinbox">
+               <property name="minimum">
+                <number>20</number>
+               </property>
+               <property name="maximum">
+                <number>200</number>
                </property>
               </widget>
              </item>
