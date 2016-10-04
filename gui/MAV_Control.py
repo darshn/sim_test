@@ -15,8 +15,7 @@ try:
     import warnings
     import subprocess
     import rospy
-    
-    
+#    from sim_test.classes import ROS_Control
 except ImportError as ie:
     print('Import Libraries missing:', ie)
     sys.exit()
@@ -30,10 +29,6 @@ class MAV_Control(QtGui.QMainWindow):
         
         QtGui.QMainWindow.__init__(self)
         loadUi("GUI.ui", self)
-        self.rospy_init()
-        rospy.loginfo(rospy.get_name() + ' -- Initialization Complete')
-        
-        
         
         self.output_directory = ''
         self.op_mode = ''
@@ -46,7 +41,7 @@ class MAV_Control(QtGui.QMainWindow):
 #        self.warning_threshold = self.warn_spinbox.value()
 #        self.activation_threshold = self.auto_spinbox.value()
 #        self.rate =
-        
+        self.keyslist = []
 
 #        self.ls_topic_cb.addItems(self.ros_topics[0])
 #        self.st_r_cb.addItems(self.ros_topics[0])
@@ -66,10 +61,7 @@ class MAV_Control(QtGui.QMainWindow):
         self.controller_widget.setEnabled(True)
         self.radio_controller.setChecked(True)
 
-#__________________________________________________________________________________________________
 
-    def rospy_init(self):
-                
         
 #__________________________________________________________________________________________________
         
@@ -122,8 +114,24 @@ class MAV_Control(QtGui.QMainWindow):
             self.ros_label.setStyleSheet('color: Green')
             self.ros_label.setText('ONLINE')
 
+        
+    def keyPressEvent(self, event):
+        if type(event) == QtGui.QKeyEvent:
+            self.firstrelease = True
+            print(event.key())
+            self.set_label('%s'%event.key(),'Red')
+            event.accept()
+        else:
+            event.ignore()
 
-
+    def keyReleaseEvent(self, event):
+        if self.firstrelease == True:
+            self.processmultikeys(self.keyslist)
+        self.firstrelease = False
+        del self.keyslist[-1]
+            
+    def processmultikeys(self,keyspressed):
+        print(keyspressed)
 #__________________________________________________________________________________________________
 
 #---------------------------------------Bottom Buttons---------------------------------------------
